@@ -5,6 +5,14 @@ A wrapper around the openssl utility for programatically generating signed certi
 
 The main function is `generate_cert_buf`. Given a signing key and cert, and a hash containing the desired subject distinguished name information, the function creates a certificate, signs it, and opens buffers to the certificate. The buffers can then be supplied to https.createServer().
 
+The hash may contain properties with the following key names:
+* 'C' (Country)
+* 'ST' (State)
+* 'L' (Locality)
+* 'O' (Organization)
+* 'OU' (Organization Unit)
+* 'CN' (Common Name)
+
 Function prototype:
 
 ```
