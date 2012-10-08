@@ -1,0 +1,31 @@
+{
+  "name": "certgen",
+  "version": "0.1.0",
+  "author": {
+    "name": "Bich C. Le",
+    "email": "bcle00@gmail.com"
+  },
+  "description": "Certificate generation library that uses the openssl command line utility",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bcle/certgen.git"
+  },
+  "homepage": "https://github.com/bcle/certgen",
+  "keywords": [
+    "ssl",
+    "certificate",
+    "pki",
+    "openssl"
+  ],
+  "engines": {
+    "node": ">=0.8.6"
+  },
+  "main": "certgen.js",
+  "dependencies": {
+    "tmp": ">=0.0.14"
+  },
+  "scripts": {
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
