@@ -1,7 +1,7 @@
 certgen
 =======
 
-A wrapper around the openssl utility for programatically generating signed certificates.
+A wrapper around the openssl utility for programatically generating signed certificates. All underlying I/O operations are asynchronous, so this is safe to use in a latency-sensitive server program.
 
 The main function is `generate_cert_buf`. Given a signing key and cert, and a hash containing the desired subject distinguished name information, the function creates a certificate, signs it, and opens buffers to the certificate. The buffers can then be supplied to https.createServer().
 
