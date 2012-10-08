@@ -27,5 +27,6 @@
   "scripts": {
   },
   "devDependencies": {},
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "readme": "# certgen\nA wrapper around openssl utility to dynamically create signed certificates. For more information, please see the [README from the github page](https://github.com/bcle/certgen#readme)\n"
 }
