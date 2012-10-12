@@ -30,6 +30,6 @@ Function prototype:
  * caCertPath: the signer's certificate
  * cb: a callback of the form cb(err, keyBuf, certBuf)
  */
-exports.generate_cert_buf = function (prefix, keepFiles, hash, caKeyPath, caCertPath, cb) {
+exports.generate_cert_buf = function (prefix, keepFiles, info, caKeyPath, caCertPath, cb) {
 }
 ```
