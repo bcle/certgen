@@ -139,22 +139,28 @@ exports.create_cert = function (opts, reqPath, caKeyPath, caCertPath, extPath, c
  */
 exports.generate_cert = function (prefix, keepFiles, info, caKeyPath, caCertPath, cb) {
   
-  var opts = { keep:keepFiles, prefix:prefix + '-', postfix:'.pem'}
+  var tmpFiles = [];
+  var opts = { prefix:prefix + '-', postfix:'.pem'}
   exports.create_keypair(opts, function(err, keyPath) {
     if (err) return cb(err);
     opts.postfix = '.cfg';
     exports.create_cert_request_config(opts, info, function (err, cfgPath) {
       if (err) return cb(err);
+      tmpFiles.push(cfgPath);
       opts.postfix = '.ext';
       opts.prefix = prefix + '-';
       create_extensions_file(opts, info, function (err, extPath) {
         if (err) return cb(err);
+        tmpFiles.push(extPath);
         opts.postfix = '.pem';
         opts.prefix = prefix + '-csr-';
         exports.create_cert_request(opts, keyPath, cfgPath, function (err, reqPath) {
           if (err) return cb(err);
+          tmpFiles.push(reqPath);
           opts.prefix = prefix + '-cert-';
           exports.create_cert(opts, reqPath, caKeyPath, caCertPath, extPath, function (err, certPath) {
+            if (!keepFiles)
+              tmpFiles.forEach( function(path) { fs.unlink(path); } );
             cb(err, keyPath, certPath);
           });
         });
@@ -183,6 +189,10 @@ exports.generate_cert_buf = function (prefix, keepFiles, info, caKeyPath, caCert
     fs.readFile(certPath, function (err, certBuf) {
       if (err) return cb(err);
       fs.readFile(keyPath, function (err, keyBuf) {
+        if (!keepFiles) {
+          fs.unlink(certPath);
+          fs.unlink(keyPath);
+        }
         cb(err, keyBuf, certBuf);
       });
     });
